@@ -1,12 +1,26 @@
 <% include partials/header %>
+<% include partials/nav %>
 
-<h1> Create a new Recipe </h1>
-<form action="/recipes" method="POST">
-  <input type="text" name="name" placeholder="Name your recipe!">
-  <input type="text" placeholder="Make some magic!">
-  <button> submit </button>
-</form>
+<header>
+  <div class="jumbotron">
+  <h1 class="display-4">Add To The Cook Book</h1>
+  <p class="lead">A litle butter, a little love and we're ready to create Magic! </p>
+</div>
+</header>
 
+<div class="container" style="width: 30%;">
+  <form action="/recipes" method="POST">
+    <div class="form-group">
+      <input class="form-control" type="text" name="name" placeholder="Name your recipe!">
+    </div>
+    <div class="form-group" id="editor">
+        <textarea class="form-control" placeholder="Make some magic!"></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block"> submit </button>
+    </div>
+  </form>
+</div>
 <a href="/recipes"> Back to all recipes </a>
 
 <% include partials/footer %>

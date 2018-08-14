@@ -20,6 +20,7 @@ var recipes = [
   {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"}
 ]
 
+
 //ROUTES
 app.get('/', function(req, res){
   res.render("landing");
