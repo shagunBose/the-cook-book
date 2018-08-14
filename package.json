@@ -1,0 +1,24 @@
+{
+  "name": "the-cook-book",
+  "version": "1.0.0",
+  "description": "My First Full-Stack Web App!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shagunBose/the-cook-book.git"
+  },
+  "author": "Shagun Bose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shagunBose/the-cook-book/issues"
+  },
+  "homepage": "https://github.com/shagunBose/the-cook-book#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}

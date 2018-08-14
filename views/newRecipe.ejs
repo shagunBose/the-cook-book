@@ -1,0 +1,12 @@
+<% include partials/header %>
+
+<h1> Create a new Recipe </h1>
+<form action="/recipes" method="POST">
+  <input type="text" name="name" placeholder="Name your recipe!">
+  <input type="text" placeholder="Make some magic!">
+  <button> submit </button>
+</form>
+
+<a href="/recipes"> Back to all recipes </a>
+
+<% include partials/footer %>
