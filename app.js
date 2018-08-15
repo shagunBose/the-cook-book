@@ -6,20 +6,19 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 
 var recipes = [
-  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
-  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"}
+  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
+  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"}
 ]
-
 
 //ROUTES
 app.get('/', function(req, res){
@@ -34,7 +33,8 @@ app.post('/recipes', function(req, res){
   //get data from form and add to recipes array
   var name = req.body.name;
   var image = 'https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png';
-  recipes.push({name: name, image: image});
+  var text = req.body.text;
+  recipes.push({name: name, image: image, text: text});
   //redirect to /recipes
   res.redirect('/recipes');
 });

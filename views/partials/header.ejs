@@ -4,6 +4,18 @@
     <meta charset="utf-8">
     <title>The Cook Book</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script>
+      tinymce.init({
+        selector: '#editor',
+        menubar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor textcolor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+        toolbar: 'bold italic backcolor | fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | numlist bullist | removeformat | help'
+      });
+    </script>
   </head>
   <body>
