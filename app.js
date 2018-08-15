@@ -31,10 +31,10 @@ app.get('/recipes', function(req, res){
 
 app.post('/recipes', function(req, res){
   //get data from form and add to recipes array
+  console.log(req.body);
   var name = req.body.name;
   var image = 'https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png';
-  var text = req.body.text;
-  recipes.push({name: name, image: image, text: text});
+  recipes.push({name: name, image: image});
   //redirect to /recipes
   res.redirect('/recipes');
 });
