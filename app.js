@@ -1,24 +1,27 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+var express = require("express"),
+    bodyParser = require("body-parser"),
+    app = express(),
+    mongoose = require("mongoose");
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 
-var recipes = [
-  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Chocolate Pancakes", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Penne Arabiata", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Margaritta Pizaa", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"},
-  {name: "Homemade Sponge Cake", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png", text: "This is a placeholder blog post"}
-]
+mongoose.connect("mongodb://localhost/the_cook_book");
+//schema set up
+var recipeSchema = new mongoose.Schema({
+  name: String,
+  image: String
+})
+var Recipe = mongoose.model("recipe", recipeSchema);
+
+// Recipe.create(
+//   {
+//     name: "Penne Arabiata",
+//     image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"
+//   }, function(err, recipe){
+//   if(err){console.log(err);} else {console.log(recipe);}
+//   }
+// )
 
 //ROUTES
 app.get('/', function(req, res){
@@ -26,17 +29,28 @@ app.get('/', function(req, res){
 })
 
 app.get('/recipes', function(req, res){
-  res.render("recipes", {recipes: recipes} );
+  //get all recipes
+  Recipe.find({}, function(err, recipes){
+    if(err){console.log(err)} else {
+      res.render("recipes", {recipes: recipes} );
+      console.log("all recipes succesfully found")
+    }
+  })
+
 });
 
 app.post('/recipes', function(req, res){
-  //get data from form and add to recipes array
+//get data, create recipe and save to DB
   console.log(req.body);
   var name = req.body.name;
   var image = 'https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png';
-  recipes.push({name: name, image: image});
+  var newRecipe = {name, image};
+  Recipe.create(newRecipe, function(err, recipe){
+    if(err){console.log(err);} else {res.redirect('/recipes');}
+  })
+
   //redirect to /recipes
-  res.redirect('/recipes');
+
 });
 
 app.get('/recipes/new', function(req, res){
