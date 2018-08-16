@@ -1,0 +1,14 @@
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+  var quill = new Quill('#editor', {
+    placeholder: 'Make some magic...',
+    theme: 'snow'
+  });
+
+  var form = document.querySelector('form');
+  form.onsubmit = function() {
+    var html = document.querySelector('.ql-editor').innerHTML;
+    var about = document.querySelector('input[name="recipe[directions]"]');
+    about.value = html;
+  }
+</script>

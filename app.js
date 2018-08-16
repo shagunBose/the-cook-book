@@ -41,9 +41,7 @@ app.get('/recipes', function(req, res){
 app.post('/recipes', function(req, res){
 //get data, create recipe and save to DB
   console.log(req.body);
-  var name = req.body.name;
-  var image = 'https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png';
-  var newRecipe = {name, image};
+  var newRecipe = req.body.recipe;
   Recipe.create(newRecipe, function(err, recipe){
     if(err){console.log(err);} else {res.redirect('/recipes');}
   })
