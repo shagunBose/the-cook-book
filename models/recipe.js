@@ -4,7 +4,13 @@ var mongoose = require("mongoose");
 var recipeSchema = new mongoose.Schema({
   name: String,
   directions: String,
-  image: String
-})
+  image: String,
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ]
+});
 
-module.exports = mongoose.model("recipe", recipeSchema);
+module.exports = mongoose.model("Recipe", recipeSchema);

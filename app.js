@@ -1,14 +1,16 @@
 var express     = require("express"),
     bodyParser  = require("body-parser"),
     app         = express(),
-    mongoose    = require("mongoose");
-    Recipe      = require("./models/recipe")
+    mongoose    = require("mongoose"),
+    Recipe      = require("./models/recipe.js"),
+    seedDB      = require("./seeds.js")
+
+seedDB();
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-
 mongoose.connect("mongodb://localhost/the_cook_book");
-
 
 
 //create new Pre-Recipe
@@ -29,7 +31,7 @@ app.get('/recipes', function(req, res){
   //get all recipes
   Recipe.find({}, function(err, recipes){
     if(err){console.log(err)} else {
-      res.render("index", {recipes: recipes} );
+      res.render("recipes/index", {recipes: recipes} );
       console.log("all recipes succesfully found")
     }
   })
@@ -51,17 +53,24 @@ app.post('/recipes', function(req, res){
 app.get('/recipes/new', function(req, res){
   //find the crecipe with provided
   //render show template
-  res.render("new");
+  res.render("recipes/new");
 });
 
 app.get('/recipes/:id', function(req, res){
   //find recipe on the basis of ID
   var id = req.params.id
-  Recipe.findById(id, function(err, foundRecipe){
+  Recipe.findById(id).populate("comments").exec(function(err, foundRecipe){
     if(err){console.log(err);}
-    else{res.render('show', {recipe: foundRecipe});}
+    else{
+      console.log(foundRecipe);
+      res.render('recipes/show', {recipe: foundRecipe});
+    }
   })
 });
+
+app.get('/recipes/:id/comments/new', function(req, res){
+  res.render('comments/new')
+})
 
 //SERVER STUFF//
 app.listen(3000, function(){
