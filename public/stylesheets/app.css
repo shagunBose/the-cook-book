@@ -19,6 +19,21 @@ hr.theme {
     margin-bottom: 30px;
 }
 
+/*Styles for all recipes */
+.card:hover {
+box-shadow: 0px 2px 9px -1px orange;
+}
+
+.container.index{
+  width: 80%;
+}
+
+.badge{
+  font-size: 1em;
+  margin: 3px;
+}
+
+
 /*Styles for the SHOW page for each recipe */
 
 .comments.show {

@@ -11,19 +11,35 @@
 
 <div class="container">
   <div class="row">
-    <div class="card-deck">
-      <% recipes.forEach(function(recipe){ %>
-            <div class="col-sm-6 col-md-4">
-              <div class="card text-center my-2 align-items-center" style="margin: 0">
-                <img class="card-img-top" src="<%= recipe.image %>" alt="<%= recipe.name %>" style="width: 15rem">
-                <div class="card-body">
-                  <h5 class="card-title"> <%= recipe.name %></h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="/recipes/<%= recipe._id %>" class="btn btn-primary">More Info</a>
+
+    <div class="col-2">
+      <div>
+        <div>SORT</div>
+        <span class="badge badge-success">Vegan</span>
+        <span class="badge badge-info">Healthy</span>
+        <span class="badge badge-warning">Dessert</span>
+        <span class="badge badge-primary">Gluten-Free</span>
+        <span class="badge badge-danger">Spicy</span>
+      </div>
+    </div>
+
+    <div class="col-10">
+      <div class="card-deck">
+        <% recipes.forEach(function(recipe){ %>
+              <div class="col-sm-6 col-md-4">
+                <div class="card text-center my-2 align-items-center" style="margin: 0">
+                  <a href="/recipes/<%= recipe._id %>">
+                    <img class="card-img-top" src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title"> <%= recipe.name %></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                  </div>
                 </div>
               </div>
-            </div>
-      <% }); %>
+        <% }); %>
+      </div>
     </div>
   </div>
 </div>

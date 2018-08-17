@@ -11,13 +11,25 @@
         <a class="nav-link active" href="/recipes">All Recipes</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="">Login</a>
-      </li>
+    </ul>
 
-      <li class="nav-item">
-        <a class="nav-link" href="">Register</a>
-      </li>
+    <ul class="nav navbar-nav navbar-right">
+      <% if(!user){ %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign Up</a>
+        </li>
+      <% }else{ %>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><%= user.username %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      <% } %>
     </ul>
 
   </div>
