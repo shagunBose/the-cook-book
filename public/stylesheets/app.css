@@ -44,12 +44,14 @@ box-shadow: 0px 2px 9px -1px orange;
   background-color: orange;
 }
 
+a.btn.show{color: white;}
+
 .addComment.show{
   border: 1px solid orange;
   padding: 10px;
 }
 
-#ingredients{
+.show-text{
   line-height: 2rem;
   font-size: 1.3rem;
 }

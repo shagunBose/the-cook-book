@@ -9,12 +9,13 @@
     </div>
 
     <div class ="col-9">
-      <h1 class="py-4"> <%= recipe.name %> </h1>
+      <h1 class="pt-4"> <%= recipe.name %> </h1>
+      <h4 class="pb-3"> by <em><%= recipe.author.username %></em> </h4>
       <div class="row">
         <div class="col-6">
           <h3>Ingredients </h3>
           <hr class="theme">
-          <ul class="fa-ul" id="ingredients">
+          <ul class="fa-ul show-text">
             <li><span class="fa-li"><i class="far fa-2x fa-heart"></i></span> <span style="margin-left: 15px">Ingredients</span> </li>
           </ul>
         </div>
@@ -25,25 +26,30 @@
       <div>
       <h3> Directions </h3>
       <hr class="theme">
-      <p> <%- recipe.directions %> </p>
+      <p class="show-text"> <%- recipe.directions %> </p>
       </div
 
       <!-- comments div -->
       <div>
         <h3> Reviews </h3>
         <hr class="theme">
+
         <div class="show addComment">
+          <% if(!user){ %>
+            <div>
+              Please log in to leave a review
+              <a class="btn btn-sm show pull-right" href="/login">Login</a>
+            </div>
+          <% } else { %>
           <form action="/recipes/<%=recipe._id%>/comments"  method="POST">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Name" name="comment[author]">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="comment[text]"> </textarea>
+              <textarea class="form-control" name="comment[text]">Leave a review...</textarea>
             </div>
             <div class="form-group mb-0">
               <button class="btn show pull-right"> Comment </button>
             </div>
           </form>
+        <%  } %>
         </div>
 
         <br>
@@ -51,7 +57,7 @@
           <ul class="list-unstyled">
             <% recipe.comments.forEach(function(comment){ %>
               <div class="media-body mt-2">
-              <h5><strong><%= comment.author %> </strong></h5>
+              <h5><strong><%= comment.author.username %> </strong></h5>
               <p> <%= comment.text %>  </p>
               </div>
             <% }) %>

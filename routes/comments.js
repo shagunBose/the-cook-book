@@ -14,6 +14,11 @@ router.post('/recipes/:id/comments', isLoggedIn, function(req, res){
             if(err){console.log(err)}
             else{
               console.log(comment);
+              //add username and ID to comment
+              comment.author.id = req.user._id;
+              comment.author.username = req.user.username;
+              //save comment
+              comment.save();
               recipe.comments.push(comment);
               recipe.save();
               res.redirect('/recipes/' + recipe._id);
@@ -28,7 +33,7 @@ function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
   }else{
-    res.redirect('login');
+    res.redirect('/login');
   }
 }
 

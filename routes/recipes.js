@@ -15,10 +15,15 @@ router.get('/', function(req, res){
 });
 
 //CREATE
-router.post('/', function(req, res){
+router.post('/', isLoggedIn, function(req, res){
 //get data, create recipe and save to DB
   console.log(req.body);
+  var author = {
+    id: req.user.id,
+    username: req.user.username
+  }
   var newRecipe = req.body.recipe;
+  newRecipe.author = author;
   Recipe.create(newRecipe, function(err, recipe){
     if(err){console.log(err);} else {res.redirect('/recipes');}
   })
@@ -26,7 +31,7 @@ router.post('/', function(req, res){
 });
 
 //NEW
-router.get('/new', function(req, res){
+router.get('/new', isLoggedIn, function(req, res){
   //find the recipe with provided
   //render show template
   res.render("recipes/new");
@@ -44,5 +49,14 @@ router.get('/:id', function(req, res){
     }
   })
 });
+
+//MIDDLEARE TO CHECK IF LOGGED IN
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }else{
+    res.redirect('/login');
+  }
+}
 
 module.exports = router;
