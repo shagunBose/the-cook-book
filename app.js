@@ -3,6 +3,7 @@ var express     = require("express"),
     app         = express(),
     mongoose    = require("mongoose"),
     Recipe      = require("./models/recipe.js"),
+    Comment     = require("./models/comment.js")
     seedDB      = require("./seeds.js")
 
 seedDB();
@@ -49,7 +50,7 @@ app.post('/recipes', function(req, res){
 });
 
 app.get('/recipes/new', function(req, res){
-  //find the crecipe with provided
+  //find the recipe with provided
   //render show template
   res.render("recipes/new");
 });
@@ -66,8 +67,27 @@ app.get('/recipes/:id', function(req, res){
   })
 });
 
-app.get('/recipes/:id/comments/new', function(req, res){
-  res.render('comments/new')
+//COMMENTS ROUTES//
+
+//comment create
+app.post('/recipes/:id/comments', function(req, res){
+   //get comment data
+   Recipe.findById(req.params.id, function(err, recipe){
+      if(err){
+        console.log(err);
+      } else{
+        Comment.create(req.body.comment, function(err, comment){
+            if(err){console.log(err)}
+            else{
+              console.log(comment);
+              recipe.comments.push(comment);
+              recipe.save();
+              res.redirect('/recipes/' + recipe._id);
+            }
+        })
+      }
+   })
+   //add comment data to recipe
 })
 
 //SERVER STUFF//

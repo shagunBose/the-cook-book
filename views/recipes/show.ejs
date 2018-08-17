@@ -1,19 +1,73 @@
 <% include ../partials/header %>
 <% include ../partials/nav %>
 
-<h1> <%= recipe.name %> </h1>
+<div class="container">
+  <div class="row">
+    <div id="sidebar" class="col-3">
+    <!-- sidebar -->
+    <!-- ingredients -->
+    </div>
 
-<img src="<%= recipe.image %>">
+    <div class ="col-9">
+      <h1 class="py-4"> <%= recipe.name %> </h1>
+      <div class="row">
+        <div class="col-6">
+          <h3>Ingredients </h3>
+          <hr class="theme">
+          <ul class="fa-ul" id="ingredients">
+            <li><span class="fa-li"><i class="far fa-2x fa-heart"></i></span> <span style="margin-left: 15px">Ingredients</span> </li>
+          </ul>
+        </div>
+        <div class="col-6"><img src="<%= recipe.image %>"></div>
+      </div>
 
-<p> <%- recipe.directions %> </p>
+      <!-- directions div -->
+      <div>
+      <h3> Directions </h3>
+      <hr class="theme">
+      <p> <%- recipe.directions %> </p>
+      </div
 
-<div>
-  <h4> Comments </h4>
-  <ul>
-    <% recipe.comments.forEach(function(comment){ %>
-      <li> <strong><%= comment.author %> </strong> : <%= comment.text %>  </li>
-    <% }) %>
-  </ul>
+      <!-- comments div -->
+      <div>
+        <h3> Reviews </h3>
+        <hr class="theme">
+        <div class="show addComment">
+          <form action="/recipes/<%=recipe._id%>/comments"  method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Name" name="comment[author]">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="comment[text]"> </textarea>
+            </div>
+            <div class="form-group mb-0">
+              <button class="btn show pull-right"> Comment </button>
+            </div>
+          </form>
+        </div>
+
+        <br>
+        <div class="media">
+          <ul class="list-unstyled">
+            <% recipe.comments.forEach(function(comment){ %>
+              <div class="media-body mt-2">
+              <h5><strong><%= comment.author %> </strong></h5>
+              <p> <%= comment.text %>  </p>
+              </div>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+      <!-- end of coments div -->
+
+    </div>
+  </div>
 </div>
+
+<script>
+ function toggleCommentForm(){
+   document.querySelector('form').style.display = block;
+ }
+</script>
 
 <% include ../partials/footer %>

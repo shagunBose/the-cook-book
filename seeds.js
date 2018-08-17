@@ -5,8 +5,7 @@ var Comment = require("./models/comment");
 var data = [
   {
     name: "Chocolate Sponge",
-    directions: "The first thing you need is love, patience and butter! Then you got to whoop a whole bunch of ingredients together, toss it in a pan - bake, cook and taste. Finally, serve hot!",
-    image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"
+    directions: "The first thing you need is love, patience and butter! Then you got to whoop a whole bunch of ingredients together, toss it in a pan - bake, cook and taste. Finally, serve hot!"
   },
   {name: "Broccoli and Cheddar Soup", directions: "The first thing you need is love, patience and butter! Then you got to whoop a whole bunch of ingredients together, toss it in a pan - bake, cook and taste. Finally, serve hot!", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"},
   {name: "Homemade Chicken Nuggets", directions: "The first thing you need is love, patience and butter! Then you got to whoop a whole bunch of ingredients together, toss it in a pan - bake, cook and taste. Finally, serve hot!", image: "https://freepngimg.com/download/cooking_tools/7-2-cooking-tools-png-clipart.png"}
