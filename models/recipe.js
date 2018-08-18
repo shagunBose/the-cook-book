@@ -4,6 +4,8 @@ var mongoose = require("mongoose");
 var recipeSchema = new mongoose.Schema({
   name: String,
   directions: String,
+  ingredients: String,
+  description: String,
   image: {
     type: String,
     default: 'https://banner2.kisspng.com/20180403/xlw/kisspng-whisk-bowl-kitchen-utensil-tableware-clip-art-baking-5ac364b2b5ce02.7808817115227547387447.jpg'

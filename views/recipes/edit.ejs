@@ -3,33 +3,38 @@
 
 <header>
   <div class="jumbotron">
-  <h1 class="display-4">Add To The Cook Book</h1>
+  <h1 class="display-4">Edit <%= recipe.name %> </h1>
   <p class="lead">A litle butter, a little love and we're ready to create Magic! </p>
 </div>
 </header>
 
 <div class="container" style="width: 55%;">
-  <form action="/recipes" method="POST">
+  <form action="/recipes/<%= recipe._id %>?_method=put" method="POST">
     <div class="form-group">
       <h4> Name Your Recipe </h4>
-      <input required class="form-control" type="text" name="recipe[name]" placeholder="The right name makes all the difference!" autocomplete="off">
+      <input required class="form-control" type="text" name="recipe[name]" placeholder="The right name makes all the difference!" autocomplete="off"
+       value="<%= recipe.name %>">
     </div>
     <div class="form-group">
       <h4> Add A Short Description </h4>
-      <textarea required class="form-control" name="recipe[description]" placeholder="This recipe is..." autocomplete="off"></textarea>
+      <textarea required class="form-control" name="recipe[description]" placeholder="This recipe is..." autocomplete="off"> <%= recipe.description %> </textarea>
     </div>
     <div class="form-group">
       <h4> Add Your *Secret* Ingredients </h4>
       <input class="form-control mb-2" type="text" placeholder="Press Enter to Add Items" id="add">
-      <div id="list"></div>
+      <div id="list">
+        <%- recipe.ingredients %>
+      </div>
       <input class="form-control" type="hidden" name="recipe[ingredients]">
     </div>
     <div class="form-group">
       <h4> Directions </h4>
-      <textarea class="form-control" placeholder="" name="recipe[directions]" id="editor"></textarea>
+      <textarea class="form-control" placeholder="" name="recipe[directions]" id="editor">
+        <%= recipe.directions %>"
+      </textarea>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary btn-block"> submit </button>
+      <button class="btn btn-primary btn-block"> Edit </button>
     </div>
   </form>
 </div>

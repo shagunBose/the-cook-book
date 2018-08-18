@@ -1,0 +1,32 @@
+<script>
+
+//delete items using cross
+
+$('input[name="recipe[name]"]').on('keydown', function(event){
+  if(event.which == '13'){
+    event.preventDefault();
+  }
+})
+
+$("#list").on("click", ".delete", function(event){
+  event.stopPropagation();
+  $(this).parent().remove();
+
+})
+
+$("#add").on("keydown", function(event){
+  if(event.which == '13'){
+    event.preventDefault();
+    item = $(this).val();
+   $("#list").append("<span class='badge badge-pill badge-warning'>" + item + "<span style='color: white' class='delete'> <i class='fas fa-times-circle'></i></span></span>");
+   $(this).val("");
+  }
+})
+
+var form = document.querySelector('form');
+form.onsubmit = function() {
+  var c = document.querySelector("input[type=hidden]");
+  c.value = document.querySelector("#list").innerHTML;
+}
+
+</script>

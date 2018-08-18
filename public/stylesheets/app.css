@@ -55,3 +55,11 @@ a.btn.show{color: white;}
   line-height: 2rem;
   font-size: 1.3rem;
 }
+
+.delete{
+  cursor: pointer;
+}
+
+.show-text li {
+  padding-bottom: 15px;
+}

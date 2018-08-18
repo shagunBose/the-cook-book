@@ -9,24 +9,29 @@
     </div>
 
     <div class ="col-9">
-      <h1 class="pt-4"> <%= recipe.name %> </h1>
+      <h1 class="pt-4"> <a href="/recipes/<%= recipe._id %>/edit"><i class="far fa-edit"></i></a> <%= recipe.name %> </h1>
       <h4 class="pb-3"> by <em><%= recipe.author.username %></em> </h4>
       <div class="row">
         <div class="col-6">
-          <h3>Ingredients </h3>
+          <h3>Short Description</h3>
           <hr class="theme">
-          <ul class="fa-ul show-text">
-            <li><span class="fa-li"><i class="far fa-2x fa-heart"></i></span> <span style="margin-left: 15px">Ingredients</span> </li>
-          </ul>
+          <span class="show-text"> <%= recipe.description %> </span>
+          <div>Rating</div>
         </div>
         <div class="col-6"><img src="<%= recipe.image %>"></div>
       </div>
 
+      <div class="mt-3">
+        <h3>Ingredients </h3>
+        <hr class="theme">
+        <%- recipe.ingredients %>
+      </div>
+
       <!-- directions div -->
-      <div>
+      <div class="mt-4">
       <h3> Directions </h3>
       <hr class="theme">
-      <p class="show-text"> <%- recipe.directions %> </p>
+      <div class="show-text"> <%- recipe.directions %> </div>
       </div
 
       <!-- comments div -->
@@ -69,11 +74,5 @@
     </div>
   </div>
 </div>
-
-<script>
- function toggleCommentForm(){
-   document.querySelector('form').style.display = block;
- }
-</script>
 
 <% include ../partials/footer %>

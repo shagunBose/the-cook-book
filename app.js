@@ -1,20 +1,21 @@
 //===========================
 //DEPENDENCIES
 //===========================
-var express       = require("express"),
-    app           = express(),
-    mongoose      = require("mongoose"),
-    passport      = require("passport"),
-    localStrategy = require("passport-local"),
-    bodyParser    = require("body-parser"),
-    Recipe        = require("./models/recipe.js"),
-    Comment       = require("./models/comment.js"),
-    User          = require("./models/user"),
-    seedDB        = require("./seeds.js")
+var express        = require("express"),
+    app            = express(),
+    mongoose       = require("mongoose"),
+    passport       = require("passport"),
+    localStrategy  = require("passport-local"),
+    bodyParser     = require("body-parser"),
+    Recipe         = require("./models/recipe.js"),
+    Comment        = require("./models/comment.js"),
+    User           = require("./models/user"),
+    seedDB         = require("./seeds.js"),
+    methodOverride = require("method-override")
 
-var commentRoutes = require("./routes/comments"),
-    recipeRoutes  = require("./routes/recipes"),
-    indexRoutes   = require("./routes/index")
+var commentRoutes  = require("./routes/comments"),
+    recipeRoutes   = require("./routes/recipes"),
+    indexRoutes    = require("./routes/index")
 
 seedDB();
 
@@ -27,6 +28,7 @@ mongoose.connect("mongodb://localhost:27017/the_cook_book", {
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 //PASSPORT CONFIGURE
 app.use(require("express-session")({

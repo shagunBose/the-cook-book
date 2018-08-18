@@ -37,7 +37,7 @@ router.get('/new', isLoggedIn, function(req, res){
   res.render("recipes/new");
 });
 
-//SOW
+//SHOW
 router.get('/:id', function(req, res){
   //find recipe on the basis of ID
   var id = req.params.id
@@ -49,6 +49,31 @@ router.get('/:id', function(req, res){
     }
   })
 });
+
+//EDIT
+router.get('/:id/edit', function(req, res){
+  Recipe.findById(req.params.id, function(err, recipe){
+    if(err){
+      res.redirect("/recipes");
+    }else{
+      res.render("recipes/edit", {recipe: recipe});
+    }
+  })
+})
+
+//UPDATE
+router.put('/:id', function(req, res){
+
+  Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, function(err, recipe){
+    if(err){
+      console.log(err);
+      res.redirect("/recipes");
+    } else {
+      res.redirect('/recipes/' + recipe._id);
+    }
+  })
+})
+
 
 //MIDDLEARE TO CHECK IF LOGGED IN
 function isLoggedIn(req, res, next){
