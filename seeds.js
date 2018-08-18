@@ -17,27 +17,27 @@ function seedDB(){
     if(err){console.log(err)}
     else {
       console.log("Removed Recipes")
-      //add customs recipes
-      data.forEach(function(seed){
-        Recipe.create(seed, function(err, recipe){
-            if(err){console.log(err)}
-            else {
-              console.log("added a Recipe");
-              //add comments
-              Comment.create({
-                text: "I absolutely love this one, it's so simple and yummy :)",
-                author: "Homer"
-                }, function(err, comment){
-                if(err){console.log(err)}
-                else{
-                  recipe.comments.push(comment);
-                  recipe.save();
-                  console.log("Comment Added");
-                }
-              })
-            }
-          })
-      })
+      // //add customs recipes
+      // data.forEach(function(seed){
+      //   Recipe.create(seed, function(err, recipe){
+      //       if(err){console.log(err)}
+      //       else {
+      //         console.log("added a Recipe");
+      //         //add comments
+      //         Comment.create({
+      //           text: "I absolutely love this one, it's so simple and yummy :)",
+      //           author: "Homer"
+      //           }, function(err, comment){
+      //           if(err){console.log(err)}
+      //           else{
+      //             recipe.comments.push(comment);
+      //             recipe.save();
+      //             console.log("Comment Added");
+      //           }
+      //         })
+      //       }
+      //     })
+      // })
     }
   })
 }

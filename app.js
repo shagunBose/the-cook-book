@@ -17,7 +17,7 @@ var commentRoutes  = require("./routes/comments"),
     recipeRoutes   = require("./routes/recipes"),
     indexRoutes    = require("./routes/index")
 
-seedDB();
+//seedDB();
 
 //ESTABLISH MONGOOSE CONNECTION
 mongoose.connect("mongodb://localhost:27017/the_cook_book", {

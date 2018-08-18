@@ -9,7 +9,11 @@
     </div>
 
     <div class ="col-9">
-      <h1 class="pt-4"> <a href="/recipes/<%= recipe._id %>/edit"><i class="far fa-edit"></i></a> <%= recipe.name %> </h1>
+      <h1 class="pt-4">
+        <% if( user && recipe.author.id.equals(user._id) ) { %>
+          <a href="/recipes/<%= recipe._id %>/edit"><i class="far fa-edit"></i></a>
+        <% } %>
+        <%= recipe.name %> </h1>
       <h4 class="pb-3"> by <em><%= recipe.author.username %></em> </h4>
       <div class="row">
         <div class="col-6">
