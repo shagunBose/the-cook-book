@@ -51,13 +51,5 @@ router.get('/logout', function(req, res){
   res.redirect('/recipes');
 })
 
-//MIDDLEARE TO CHECK IF LOGGED IN
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }else{
-    res.redirect('login');
-  }
-}
 
 module.exports = router;
