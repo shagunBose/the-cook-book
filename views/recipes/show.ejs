@@ -50,7 +50,7 @@
               <a class="btn btn-sm show pull-right" href="/login">Login</a>
             </div>
           <% } else { %>
-          <form action="/recipes/<%=recipe._id%>/comments"  method="POST">
+          <form action="/recipes/<%= recipe._id %>/comments"  method="POST">
             <div class="form-group">
               <textarea class="form-control" name="comment[text]">Leave a review...</textarea>
             </div>
@@ -63,11 +63,21 @@
 
         <br>
         <div class="media">
-          <ul class="list-unstyled">
+          <ul class="list-unstyled w-100">
             <% recipe.comments.forEach(function(comment){ %>
-              <div class="media-body mt-2">
-              <h5><strong><%= comment.author.username %> </strong></h5>
-              <p> <%= comment.text %>  </p>
+              <div class="media-body my-2 comment">
+                <h5><strong><%= comment.author.username %> </strong> </h5>
+                <p class="mb-0"> <%= comment.text %> </p>
+                <% if(user && comment.author.id.equals(user._id)){ %>
+                <span>
+                <a href="/recipes/<%= recipe._id %>/comments/<%= comment.id %>/edit"> <button class="btn btn-sm comment"> <i class="far fa-edit"></i> </button></a>
+                <form class="d-inline" action="/recipes/<%= recipe._id %>/comments/<%= comment.id %>?_method=delete" method="POST">
+                  <button class="btn btn-sm comment"> <i class="fas fa-trash"></i> </button>
+                <form>
+                <span>
+                <% } %>
+
+
               </div>
             <% }) %>
           </ul>
@@ -78,5 +88,6 @@
     </div>
   </div>
 </div>
+
 
 <% include ../partials/footer %>

@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+
+<div class="container">
+  <div style="margin: 0 auto; margin-top: 50px; width: 50%">
+    <h5>Edit Comment </h5>
+    <form action="/recipes/<%= recipe_id %>/comments/<%= comment.id %>/edit?_method=put"  method="POST">
+      <div class="form-group">
+        <textarea class="form-control" name="comment[text]"><%= comment.text %></textarea>
+      </div>
+      <div class="form-group mb-0">
+        <button class="btn show pull-right"> Comment </button>
+      </div>
+    </form>
+  <div>
+</div>
+
+
+<% include ../partials/footer %>

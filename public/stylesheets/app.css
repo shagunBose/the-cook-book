@@ -63,3 +63,18 @@ a.btn.show{color: white;}
 .show-text li {
   padding-bottom: 15px;
 }
+
+.media-body.comment{
+  border-bottom: 1px solid orange;
+  padding-bottom: 10px;
+}
+
+.btn.comment{
+ color: orange;
+ border: none;
+ text-decoration: none
+}
+
+.btn.comment:hover{
+  color: black;
+}

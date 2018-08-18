@@ -28,12 +28,67 @@ router.post('/recipes/:id/comments', isLoggedIn, function(req, res){
    })
 })
 
+//comment edit route
+router.get('/recipes/:id/comments/:commentId/edit', function(req, res){
+  Comment.findById(req.params.commentId, function(err, comment){
+    if(err){
+      res.redirect("back");
+    } else {
+      res.render("comments/edit", {recipe_id: req.params.id, comment: comment});
+    }
+  })
+})
+
+//comments update routes
+router.put('/recipes/:id/comments/:commentId/edit', checkCommentsOwnership, function(req, res){
+  Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(err, comment){
+    if(err){
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.redirect('/recipes/' + req.params.id);
+    }
+  })
+})
+
+//delete comments
+router.delete('/recipes/:id/comments/:commentId', checkCommentsOwnership, function(req, res){
+  Comment.findByIdAndRemove(req.params.commentId, function(err, comment){
+    if(err){
+      res.redirect("back");
+    } else {
+      res.redirect("/recipes/" + req.params.id);
+    }
+  })
+})
+
+
 //MIDDLEARE TO CHECK IF LOGGED IN
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
   }else{
     res.redirect('/login');
+  }
+}
+
+function checkCommentsOwnership(req, res, next){
+  if(req.isAuthenticated()){
+    Comment.findById(req.params.commentId, function(err, comment){
+      if(err){
+        res.redirect("back");
+      }else{
+        //does the user own the comment
+        if(comment.author.id.equals(req.user._id)){
+          next();
+        } else {
+          //no permission to do so
+          res.redirect("back");
+        }
+      }
+    })
+  } else {
+    res.redirect('back');
   }
 }
 
