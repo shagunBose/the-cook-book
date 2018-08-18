@@ -55,7 +55,7 @@ router.get('/:id', function(req, res){
 router.get('/:id/edit', middleware.checkRecipeOwnership, function(req, res){
   Recipe.findById(req.params.id, function(err, recipe){
       if(err){
-        res.redirect("/recipes");
+        res.redirect("/recipes/");
       }else{
           res.render("recipes/edit", {recipe: recipe});
         }
@@ -70,6 +70,7 @@ router.put('/:id', middleware.checkRecipeOwnership, function(req, res){
       console.log(err);
       res.redirect("/recipes");
     } else {
+      req.flash("success", "Succesfully edited");
       res.redirect('/recipes/' + recipe._id);
     }
   })
@@ -81,6 +82,7 @@ router.delete('/:id', middleware.checkRecipeOwnership, function(req, res){
     if(err){
       res.redirect("/recipes/" + req.params.id);
     } else {
+      req.flash("success", "Succesfully deleted");
       res.redirect("/recipes");
     }
   })

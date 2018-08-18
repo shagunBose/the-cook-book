@@ -24,10 +24,11 @@ router.post('/signup', function(req, res){
   var newUser = new User({username: req.body.username});
   User.register(newUser, req.body.password, function(err, user){
     if(err){
-      console.log(err);
-      res.render('signup')
+      req.flash("error", err.message);
+      return res.redirect('signup');
     }else{
       passport.authenticate("local")(req, res, function(){
+        req.flash("success", "Welcome to The Cook Book, " + user.username);
         res.redirect('/recipes');
       });
     }
@@ -41,13 +42,15 @@ router.get('/login', function(req, res){
 
 router.post('/login', passport.authenticate("local", {
   successRedirect: '/recipes',
-  failureRedirect: '/login'
+  failureRedirect: '/login',
+  failureFlash: true
 }), function(req, res){
 });
 
 //LOGOUT
 router.get('/logout', function(req, res){
   req.logout();
+  req.flash("success", "Loggged you out!")
   res.redirect('/recipes');
 })
 

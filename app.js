@@ -11,6 +11,7 @@ var express        = require("express"),
     Comment        = require("./models/comment.js"),
     User           = require("./models/user"),
     seedDB         = require("./seeds.js"),
+    flash          = require("connect-flash"),
     methodOverride = require("method-override")
 
 var commentRoutes  = require("./routes/comments"),
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(flash());
 
 //PASSPORT CONFIGURE
 app.use(require("express-session")({
@@ -45,6 +47,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
   res.locals.user = req.user;
+  res.locals.error = req.flash("error")
+  res.locals.success = req.flash("success")
   next();
 })
 

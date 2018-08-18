@@ -34,3 +34,23 @@
 
   </div>
 </nav>
+
+<% if( error && error.length > 0) { %>
+<div style="
+position: fixed;
+top: 80%;
+left: 80%;
+width: 20%;
+padding: 10px;
+" class="container"> <div class="alert alert-danger"> <%= error %> </div></div>
+<% } %>
+
+<% if( success && success.length > 0) { %>
+<div style="
+position: fixed;
+top: 80%;
+left: 80%;
+width: 20%;
+padding: 10px;
+" class="container"> <div class="alert alert-success"> <%= success %> </div></div>
+<% } %>

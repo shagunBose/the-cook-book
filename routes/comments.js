@@ -14,8 +14,10 @@ router.post('/recipes/:id/comments', middleware.isLoggedIn, function(req, res){
         console.log(err);
       } else{
         Comment.create(req.body.comment, function(err, comment){
-            if(err){console.log(err)}
-            else{
+            if(err){
+              console.log(err)
+              req.flash("error", "Something went wrong :/");
+            } else{
               console.log(comment);
               //add username and ID to comment
               comment.author.id = req.user._id;
@@ -24,6 +26,7 @@ router.post('/recipes/:id/comments', middleware.isLoggedIn, function(req, res){
               comment.save();
               recipe.comments.push(comment);
               recipe.save();
+              req.flash("success", "Succesfully added comment");
               res.redirect('/recipes/' + recipe._id);
             }
         })
@@ -60,6 +63,7 @@ router.delete('/recipes/:id/comments/:commentId', middleware.checkCommentsOwners
     if(err){
       res.redirect("back");
     } else {
+      req.flash("success", "Succesfully deleted");
       res.redirect("/recipes/" + req.params.id);
     }
   })
