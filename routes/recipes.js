@@ -74,6 +74,18 @@ router.put('/:id', function(req, res){
   })
 })
 
+//DESTROY RECIPE ROUTE
+router.delete('/:id', function(req, res){
+  Recipe.findByIdAndRemove(req.params.id, function(err, recipe){
+    if(err){
+      res.redirect("/recipes/" + req.params.id);
+    } else {
+      res.redirect("/recipes");
+    }
+  })
+
+})
+
 
 //MIDDLEARE TO CHECK IF LOGGED IN
 function isLoggedIn(req, res, next){
