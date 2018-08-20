@@ -9,7 +9,6 @@ router.get('/', function(req, res){
   Recipe.find({}, function(err, recipes){
     if(err){console.log(err)} else {
       res.render("recipes/index", {recipes: recipes, user: req.user} );
-      console.log("all recipes succesfully found")
     }
   })
 
@@ -45,7 +44,6 @@ router.get('/:id', function(req, res){
   Recipe.findById(id).populate("comments").exec(function(err, foundRecipe){
     if(err){console.log(err);}
     else{
-      console.log(foundRecipe);
       res.render('recipes/show', {recipe: foundRecipe});
     }
   })

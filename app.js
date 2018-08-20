@@ -10,6 +10,7 @@ var express        = require("express"),
     Recipe         = require("./models/recipe.js"),
     Comment        = require("./models/comment.js"),
     User           = require("./models/user"),
+    Rating         = require("./models/rating"),
     seedDB         = require("./seeds.js"),
     flash          = require("connect-flash"),
     methodOverride = require("method-override")

@@ -5,9 +5,9 @@ var middleware = {};
 middleware.checkRecipeOwnership = function (req, res, next){
   if(req.isAuthenticated()){
     Recipe.findById(req.params.id, function(err, recipe){
-      if(err || !recipe){
+      if(err){
         req.flash("error", "Something went wrong, please try again");
-        res.redirect("/recipes");
+        res.redirect("back");
       }else{
         //does the user own the recipes
         if(!recipe){
@@ -18,13 +18,13 @@ middleware.checkRecipeOwnership = function (req, res, next){
         } else {
           //no permission to do so
           req.flash("error", "You don't have permission to edit this recipe.");
-          res.redirect("back");
+          res.redirect("/recipes/" + recipe._id);
         }
       }
     })
   } else {
     req.flash("error", "You need to be logged in.");
-    res.redirect('back');
+    res.redirect("/recipes/");
   }
 }
 
@@ -59,7 +59,7 @@ if(req.isAuthenticated()){
     return next();
   }else{
     req.flash("error", "You need to be logged in.");
-    res.redirect('/login');
+    res.redirect('back');
   }
 }
 

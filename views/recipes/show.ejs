@@ -20,7 +20,6 @@
           <h3>Short Description</h3>
           <hr class="theme">
           <span class="show-text"> <%= recipe.description %> </span>
-          <div>Rating</div>
         </div>
         <div class="col-6"><img src="<%= recipe.image %>"></div>
       </div>
@@ -51,6 +50,18 @@
             </div>
           <% } else { %>
           <form action="/recipes/<%= recipe._id %>/comments"  method="POST">
+            <div class="form-group row">
+              <label for="rating" class="col-sm-2 col-form-label">Leave a Rating</label>
+              <div class="col-sm-10">
+              <select class="form-control" name="rating[value]" id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            </div>
             <div class="form-group">
               <textarea class="form-control" name="comment[text]">Leave a review...</textarea>
             </div>

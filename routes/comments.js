@@ -1,6 +1,7 @@
 var express = require("express");
 var Recipe = require("../models/recipe.js");
 var Comment = require("../models/comment.js");
+var Rating = require("../models/rating.js");
 var middleware = require("../middleware");
 
 var router = express.Router();
